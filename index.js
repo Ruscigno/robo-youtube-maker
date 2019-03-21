@@ -1,17 +1,23 @@
 const readline = require('readline-sync')
+const robots = {
+    text: require('./robots/text.js')
+}
 
-function start(){
+async function start(){
     const content = {}
 
     content.searchTerm = askAndReturnSearchTearm()
     content.prefix = askAndReturnPrefix()
 
-    function askAndReturnSearchTearm() {
-        return readline.question('Type a Wikipedia search term: ') 
-    }
+    await robots.text(content)
 
     function askAndReturnSearchTearm() {
-        const prefixes = ['Who is', 'What is', 'The history of', 'CANCEL']
+        return 'Michael Jackson'
+        //return readline.question('Type a Wikipedia search term: ') 
+    }
+
+    function askAndReturnPrefix() {
+        const prefixes = ['Who is', 'What is', 'The history of']
         const selectedPrefixIndex = readline.keyInSelect(prefixes, 'Choose a prefix')
         const selectedPrefixText = prefixes[selectedPrefixIndex]
         return selectedPrefixText
@@ -19,5 +25,5 @@ function start(){
 
     console.log(content)
 }
-
+ 
 start()
